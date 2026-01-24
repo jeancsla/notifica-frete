@@ -33,11 +33,14 @@ const app = new Elysia()
   .use(authMiddleware)
   .use(dataRoute)
   .use(scrapeRoute(scraperService, dbService))
-  .use(cronRoute(scraperService, dbService, notificationService))
-  .listen(process.env.PORT || 3000);
+  .use(cronRoute(scraperService, dbService, notificationService));
 
-console.log(
-  `🦊 Scraper API is running at ${app.server?.hostname}:${app.server?.port}`,
-);
+if (process.env.NODE_ENV !== "production") {
+  app.listen(process.env.PORT || 3000);
+  console.log(
+    `🦊 Scraper API is running at ${app.server?.hostname}:${app.server?.port}`,
+  );
+}
 
 export type App = typeof app;
+export { app };
