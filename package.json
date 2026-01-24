@@ -1,0 +1,32 @@
+{
+  "name": "notifica-frete",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun install && bun --hot src/index.ts",
+    "test": "bun test",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
+  },
+  "dependencies": {
+    "@elysiajs/bearer": "latest",
+    "@elysiajs/cors": "latest",
+    "@prisma/adapter-pg": "latest",
+    "@prisma/client": "latest",
+    "@prisma/config": "latest",
+    "cheerio": "latest",
+    "dotenv": "latest",
+    "elysia": "latest",
+    "@elysiajs/static": "latest",
+    "pg": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/cheerio": "latest",
+    "@types/node": "latest",
+    "@types/pg": "latest",
+    "bun-types": "latest",
+    "prisma": "latest",
+    "typescript": "latest"
+  }
+}
