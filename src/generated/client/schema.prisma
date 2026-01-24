@@ -19,6 +19,7 @@ model Carga {
   qtdeEntregas   String
   vrFrete        String // May be empty
   termino        String
+  status         String   @default("ACTIVE") // 'ACTIVE' | 'ARCHIVED'
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
@@ -26,6 +27,7 @@ model Carga {
 
   @@index([viagem])
   @@index([createdAt])
+  @@index([status])
 }
 
 model CargaHistorico {
@@ -43,6 +45,7 @@ model CargaHistorico {
   qtdeEntregas   String
   vrFrete        String
   termino        String
+  status         String @default("ACTIVE")
 
   changeType String // 'CREATED' | 'UPDATED'
   changedAt  DateTime @default(now())

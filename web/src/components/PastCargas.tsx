@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import {
-  TrendingUp,
   Package,
-  AlertCircle,
-  CheckCircle2,
   RefreshCcw,
-  Search,
   ArrowUpRight,
   Filter,
   Truck,
+  Clock,
+  Archive,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -30,11 +21,10 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { api } from "@/lib/eden";
-import { ScrapeButton } from "./ScrapeButton";
 import { AdvancedFilter } from "./AdvancedFilter";
 import type { FilterValues } from "./AdvancedFilter";
 
-export function Overview() {
+export function PastCargas() {
   const [cargas, setCargas] = useState<any[]>([]);
   const [filters, setFilters] = useState<FilterValues>({
     search: "",
@@ -46,7 +36,7 @@ export function Overview() {
   const fetchCargas = async () => {
     setLoading(true);
     try {
-      const { data } = await api.api.cargas.active.get();
+      const { data } = await api.api.cargas.archived.get();
       if (Array.isArray(data)) {
         setCargas(data);
       } else {
@@ -56,7 +46,7 @@ export function Overview() {
         setCargas([]);
       }
     } catch (err) {
-      console.error("Failed to fetch freight data:", err);
+      console.error("Failed to fetch archived freight data:", err);
       setCargas([]);
     } finally {
       setLoading(false);
@@ -94,34 +84,33 @@ export function Overview() {
     fetchCargas();
   }, []);
 
+  const formatDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+    } catch {
+      return dateString;
+    }
+  };
+
   const stats = [
     {
-      label: "Fretes Ativos",
+      label: "Fretes Arquivados",
       value: cargas.length,
-      icon: Package,
-      color: "text-blue-400",
-      bg: "bg-blue-400/10",
-    },
-    {
-      label: "Vistos Hoje",
-      value: 142,
-      icon: TrendingUp,
-      color: "text-emerald-400",
-      bg: "bg-emerald-400/10",
-    },
-    {
-      label: "Alertas",
-      value: 0,
-      icon: AlertCircle,
+      icon: Archive,
       color: "text-amber-400",
       bg: "bg-amber-400/10",
     },
     {
-      label: "Status Engine",
-      value: "Online",
-      icon: CheckCircle2,
-      color: "text-primary",
-      bg: "bg-primary/10",
+      label: "Total Histórico",
+      value: cargas.length,
+      icon: Package,
+      color: "text-orange-400",
+      bg: "bg-orange-400/10",
     },
   ];
 
@@ -130,10 +119,10 @@ export function Overview() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h2 className="text-4xl font-extrabold tracking-tight mb-2">
-            Painel Geral
+            Histórico de Cargas
           </h2>
           <p className="text-muted-foreground text-lg font-medium">
-            Controle de fluxo de fretes Tegma.
+            Cargas que não estão mais disponíveis no portal Tegma.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -147,18 +136,17 @@ export function Overview() {
             <RefreshCcw
               className={cn("mr-2 h-5 w-5", loading && "animate-spin")}
             />
-            Sincronizar
+            Atualizar
           </Button>
-          <ScrapeButton onComplete={fetchCargas} />
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="glass rounded-[2rem] p-7 transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 group"
+            className="glass rounded-[2rem] p-7 transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 group border border-amber-500/20"
           >
             <div className="flex items-center justify-between mb-4">
               <div
@@ -169,7 +157,7 @@ export function Overview() {
               >
                 <stat.icon className={cn("h-6 w-6", stat.color)} />
               </div>
-              <ArrowUpRight className="h-5 w-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all -translate-y-1 translate-x-1" />
+              <Clock className="h-5 w-5 text-muted-foreground opacity-50" />
             </div>
             <div>
               <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-1">
@@ -184,13 +172,13 @@ export function Overview() {
       </div>
 
       {/* Main Table Card */}
-      <div className="glass rounded-[2.5rem] overflow-hidden border-white/5 shadow-2xl">
+      <div className="glass rounded-[2.5rem] overflow-hidden border-amber-500/20 shadow-2xl">
         <div className="p-10 pb-6">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="space-y-1">
-              <h3 className="text-2xl font-black">Fretes Identificados</h3>
+              <h3 className="text-2xl font-black">Cargas Passadas</h3>
               <p className="text-muted-foreground font-medium">
-                Monitoramento em tempo real do portal Tegma.
+                Registro histórico de cargas não mais disponíveis.
               </p>
             </div>
 
@@ -227,8 +215,8 @@ export function Overview() {
                     <TableHead className="h-16 px-8 text-muted-foreground font-bold uppercase tracking-wider text-[11px]">
                       Remuneração
                     </TableHead>
-                    <TableHead className="h-16 px-8 text-right text-muted-foreground font-bold uppercase tracking-wider text-[11px]">
-                      Ações
+                    <TableHead className="h-16 px-8 text-muted-foreground font-bold uppercase tracking-wider text-[11px]">
+                      Última Atualização
                     </TableHead>
                   </TableRow>
                 </TableHeader>
@@ -236,11 +224,11 @@ export function Overview() {
                   {filteredCargas.map((carga) => (
                     <TableRow
                       key={carga.id}
-                      className="group border-white/5 hover:bg-white/5 transition-all px-6"
+                      className="group border-white/5 hover:bg-white/5 transition-all px-6 opacity-70"
                     >
                       <TableCell className="px-8 py-6">
                         <div className="flex items-center gap-4">
-                          <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 text-primary group-hover:scale-110 transition-transform">
+                          <div className="h-10 w-10 rounded-xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 text-amber-400 group-hover:scale-110 transition-transform">
                             <Truck className="h-5 w-5" />
                           </div>
                           <div className="flex flex-col">
@@ -274,7 +262,7 @@ export function Overview() {
                       </TableCell>
                       <TableCell className="px-8 py-6">
                         <div className="flex flex-col">
-                          <span className="font-black text-primary text-base">
+                          <span className="font-black text-amber-400 text-base">
                             {carga.vrFrete || "Consultar"}
                           </span>
                           <span className="text-[10px] text-muted-foreground uppercase font-black">
@@ -282,13 +270,11 @@ export function Overview() {
                           </span>
                         </div>
                       </TableCell>
-                      <TableCell className="px-8 py-6 text-right">
-                        <Button
-                          variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:bg-primary/20 hover:text-primary transition-all"
-                        >
-                          <Search className="h-5 w-5" />
-                        </Button>
+                      <TableCell className="px-8 py-6">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="h-4 w-4" />
+                          {formatDate(carga.updatedAt)}
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -305,14 +291,14 @@ export function Overview() {
                               filters.equipamento.length > 0 ||
                               filters.tipoTransporte.length > 0
                                 ? "Nenhum resultado"
-                                : "Lista Vazia"}
+                                : "Sem Histórico"}
                             </p>
                             <p className="text-sm text-muted-foreground">
                               {filters.search ||
                               filters.equipamento.length > 0 ||
                               filters.tipoTransporte.length > 0
                                 ? "Tente buscar por outro termo ou limpe o filtro."
-                                : "Aguardando sincronização com o portal."}
+                                : "Nenhuma carga foi arquivada ainda."}
                             </p>
                           </div>
                         </div>

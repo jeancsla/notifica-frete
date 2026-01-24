@@ -12,6 +12,11 @@ export const scrapeRoute = (scraper: ScraperService, db: DatabaseService) =>
 
     try {
       const cargas = await scraper.scrape();
+
+      // Sync status: mark all as ARCHIVED, then mark scraped as ACTIVE
+      const viagemIds = cargas.map((c) => c.viagem);
+      await db.syncCargasStatus(viagemIds);
+
       const results = [];
       const summary: ScrapeSummary = {
         totalFound: cargas.length,

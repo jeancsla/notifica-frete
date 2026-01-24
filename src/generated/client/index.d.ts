@@ -1096,6 +1096,7 @@ export namespace Prisma {
     qtdeEntregas: string | null
     vrFrete: string | null
     termino: string | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1112,6 +1113,7 @@ export namespace Prisma {
     qtdeEntregas: string | null
     vrFrete: string | null
     termino: string | null
+    status: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1128,6 +1130,7 @@ export namespace Prisma {
     qtdeEntregas: number
     vrFrete: number
     termino: number
+    status: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1146,6 +1149,7 @@ export namespace Prisma {
     qtdeEntregas?: true
     vrFrete?: true
     termino?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1162,6 +1166,7 @@ export namespace Prisma {
     qtdeEntregas?: true
     vrFrete?: true
     termino?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1178,6 +1183,7 @@ export namespace Prisma {
     qtdeEntregas?: true
     vrFrete?: true
     termino?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1267,6 +1273,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status: string
     createdAt: Date
     updatedAt: Date
     _count: CargaCountAggregateOutputType | null
@@ -1300,6 +1307,7 @@ export namespace Prisma {
     qtdeEntregas?: boolean
     vrFrete?: boolean
     termino?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     historico?: boolean | Carga$historicoArgs<ExtArgs>
@@ -1318,6 +1326,7 @@ export namespace Prisma {
     qtdeEntregas?: boolean
     vrFrete?: boolean
     termino?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["carga"]>
@@ -1334,6 +1343,7 @@ export namespace Prisma {
     qtdeEntregas?: boolean
     vrFrete?: boolean
     termino?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["carga"]>
@@ -1350,11 +1360,12 @@ export namespace Prisma {
     qtdeEntregas?: boolean
     vrFrete?: boolean
     termino?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CargaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "viagem" | "tipoTransporte" | "origem" | "destino" | "produto" | "equipamento" | "prevColeta" | "qtdeEntregas" | "vrFrete" | "termino" | "createdAt" | "updatedAt", ExtArgs["result"]["carga"]>
+  export type CargaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "viagem" | "tipoTransporte" | "origem" | "destino" | "produto" | "equipamento" | "prevColeta" | "qtdeEntregas" | "vrFrete" | "termino" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["carga"]>
   export type CargaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     historico?: boolean | Carga$historicoArgs<ExtArgs>
     _count?: boolean | CargaCountOutputTypeDefaultArgs<ExtArgs>
@@ -1379,6 +1390,7 @@ export namespace Prisma {
       qtdeEntregas: string
       vrFrete: string
       termino: string
+      status: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["carga"]>
@@ -1816,6 +1828,7 @@ export namespace Prisma {
     readonly qtdeEntregas: FieldRef<"Carga", 'String'>
     readonly vrFrete: FieldRef<"Carga", 'String'>
     readonly termino: FieldRef<"Carga", 'String'>
+    readonly status: FieldRef<"Carga", 'String'>
     readonly createdAt: FieldRef<"Carga", 'DateTime'>
     readonly updatedAt: FieldRef<"Carga", 'DateTime'>
   }
@@ -2271,6 +2284,7 @@ export namespace Prisma {
     qtdeEntregas: string | null
     vrFrete: string | null
     termino: string | null
+    status: string | null
     changeType: string | null
     changedAt: Date | null
   }
@@ -2288,6 +2302,7 @@ export namespace Prisma {
     qtdeEntregas: string | null
     vrFrete: string | null
     termino: string | null
+    status: string | null
     changeType: string | null
     changedAt: Date | null
   }
@@ -2305,6 +2320,7 @@ export namespace Prisma {
     qtdeEntregas: number
     vrFrete: number
     termino: number
+    status: number
     changeType: number
     changedAt: number
     _all: number
@@ -2324,6 +2340,7 @@ export namespace Prisma {
     qtdeEntregas?: true
     vrFrete?: true
     termino?: true
+    status?: true
     changeType?: true
     changedAt?: true
   }
@@ -2341,6 +2358,7 @@ export namespace Prisma {
     qtdeEntregas?: true
     vrFrete?: true
     termino?: true
+    status?: true
     changeType?: true
     changedAt?: true
   }
@@ -2358,6 +2376,7 @@ export namespace Prisma {
     qtdeEntregas?: true
     vrFrete?: true
     termino?: true
+    status?: true
     changeType?: true
     changedAt?: true
     _all?: true
@@ -2448,6 +2467,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status: string
     changeType: string
     changedAt: Date
     _count: CargaHistoricoCountAggregateOutputType | null
@@ -2482,6 +2502,7 @@ export namespace Prisma {
     qtdeEntregas?: boolean
     vrFrete?: boolean
     termino?: boolean
+    status?: boolean
     changeType?: boolean
     changedAt?: boolean
     carga?: boolean | CargaDefaultArgs<ExtArgs>
@@ -2500,6 +2521,7 @@ export namespace Prisma {
     qtdeEntregas?: boolean
     vrFrete?: boolean
     termino?: boolean
+    status?: boolean
     changeType?: boolean
     changedAt?: boolean
     carga?: boolean | CargaDefaultArgs<ExtArgs>
@@ -2518,6 +2540,7 @@ export namespace Prisma {
     qtdeEntregas?: boolean
     vrFrete?: boolean
     termino?: boolean
+    status?: boolean
     changeType?: boolean
     changedAt?: boolean
     carga?: boolean | CargaDefaultArgs<ExtArgs>
@@ -2536,11 +2559,12 @@ export namespace Prisma {
     qtdeEntregas?: boolean
     vrFrete?: boolean
     termino?: boolean
+    status?: boolean
     changeType?: boolean
     changedAt?: boolean
   }
 
-  export type CargaHistoricoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cargaId" | "viagem" | "tipoTransporte" | "origem" | "destino" | "produto" | "equipamento" | "prevColeta" | "qtdeEntregas" | "vrFrete" | "termino" | "changeType" | "changedAt", ExtArgs["result"]["cargaHistorico"]>
+  export type CargaHistoricoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cargaId" | "viagem" | "tipoTransporte" | "origem" | "destino" | "produto" | "equipamento" | "prevColeta" | "qtdeEntregas" | "vrFrete" | "termino" | "status" | "changeType" | "changedAt", ExtArgs["result"]["cargaHistorico"]>
   export type CargaHistoricoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     carga?: boolean | CargaDefaultArgs<ExtArgs>
   }
@@ -2569,6 +2593,7 @@ export namespace Prisma {
       qtdeEntregas: string
       vrFrete: string
       termino: string
+      status: string
       changeType: string
       changedAt: Date
     }, ExtArgs["result"]["cargaHistorico"]>
@@ -3007,6 +3032,7 @@ export namespace Prisma {
     readonly qtdeEntregas: FieldRef<"CargaHistorico", 'String'>
     readonly vrFrete: FieldRef<"CargaHistorico", 'String'>
     readonly termino: FieldRef<"CargaHistorico", 'String'>
+    readonly status: FieldRef<"CargaHistorico", 'String'>
     readonly changeType: FieldRef<"CargaHistorico", 'String'>
     readonly changedAt: FieldRef<"CargaHistorico", 'DateTime'>
   }
@@ -4470,6 +4496,7 @@ export namespace Prisma {
     qtdeEntregas: 'qtdeEntregas',
     vrFrete: 'vrFrete',
     termino: 'termino',
+    status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -4490,6 +4517,7 @@ export namespace Prisma {
     qtdeEntregas: 'qtdeEntregas',
     vrFrete: 'vrFrete',
     termino: 'termino',
+    status: 'status',
     changeType: 'changeType',
     changedAt: 'changedAt'
   };
@@ -4599,6 +4627,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFilter<"Carga"> | string
     vrFrete?: StringFilter<"Carga"> | string
     termino?: StringFilter<"Carga"> | string
+    status?: StringFilter<"Carga"> | string
     createdAt?: DateTimeFilter<"Carga"> | Date | string
     updatedAt?: DateTimeFilter<"Carga"> | Date | string
     historico?: CargaHistoricoListRelationFilter
@@ -4616,6 +4645,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     historico?: CargaHistoricoOrderByRelationAggregateInput
@@ -4636,6 +4666,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFilter<"Carga"> | string
     vrFrete?: StringFilter<"Carga"> | string
     termino?: StringFilter<"Carga"> | string
+    status?: StringFilter<"Carga"> | string
     createdAt?: DateTimeFilter<"Carga"> | Date | string
     updatedAt?: DateTimeFilter<"Carga"> | Date | string
     historico?: CargaHistoricoListRelationFilter
@@ -4653,6 +4684,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CargaCountOrderByAggregateInput
@@ -4675,6 +4707,7 @@ export namespace Prisma {
     qtdeEntregas?: StringWithAggregatesFilter<"Carga"> | string
     vrFrete?: StringWithAggregatesFilter<"Carga"> | string
     termino?: StringWithAggregatesFilter<"Carga"> | string
+    status?: StringWithAggregatesFilter<"Carga"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Carga"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Carga"> | Date | string
   }
@@ -4695,6 +4728,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFilter<"CargaHistorico"> | string
     vrFrete?: StringFilter<"CargaHistorico"> | string
     termino?: StringFilter<"CargaHistorico"> | string
+    status?: StringFilter<"CargaHistorico"> | string
     changeType?: StringFilter<"CargaHistorico"> | string
     changedAt?: DateTimeFilter<"CargaHistorico"> | Date | string
     carga?: XOR<CargaScalarRelationFilter, CargaWhereInput>
@@ -4713,6 +4747,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     changeType?: SortOrder
     changedAt?: SortOrder
     carga?: CargaOrderByWithRelationInput
@@ -4734,6 +4769,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFilter<"CargaHistorico"> | string
     vrFrete?: StringFilter<"CargaHistorico"> | string
     termino?: StringFilter<"CargaHistorico"> | string
+    status?: StringFilter<"CargaHistorico"> | string
     changeType?: StringFilter<"CargaHistorico"> | string
     changedAt?: DateTimeFilter<"CargaHistorico"> | Date | string
     carga?: XOR<CargaScalarRelationFilter, CargaWhereInput>
@@ -4752,6 +4788,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     changeType?: SortOrder
     changedAt?: SortOrder
     _count?: CargaHistoricoCountOrderByAggregateInput
@@ -4775,6 +4812,7 @@ export namespace Prisma {
     qtdeEntregas?: StringWithAggregatesFilter<"CargaHistorico"> | string
     vrFrete?: StringWithAggregatesFilter<"CargaHistorico"> | string
     termino?: StringWithAggregatesFilter<"CargaHistorico"> | string
+    status?: StringWithAggregatesFilter<"CargaHistorico"> | string
     changeType?: StringWithAggregatesFilter<"CargaHistorico"> | string
     changedAt?: DateTimeWithAggregatesFilter<"CargaHistorico"> | Date | string
   }
@@ -4853,6 +4891,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     historico?: CargaHistoricoCreateNestedManyWithoutCargaInput
@@ -4870,6 +4909,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     historico?: CargaHistoricoUncheckedCreateNestedManyWithoutCargaInput
@@ -4887,6 +4927,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     historico?: CargaHistoricoUpdateManyWithoutCargaNestedInput
@@ -4904,6 +4945,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     historico?: CargaHistoricoUncheckedUpdateManyWithoutCargaNestedInput
@@ -4921,6 +4963,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4937,6 +4980,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4953,6 +4997,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4969,6 +5014,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     changeType: string
     changedAt?: Date | string
     carga: CargaCreateNestedOneWithoutHistoricoInput
@@ -4987,6 +5033,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     changeType: string
     changedAt?: Date | string
   }
@@ -5003,6 +5050,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     changeType?: StringFieldUpdateOperationsInput | string
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     carga?: CargaUpdateOneRequiredWithoutHistoricoNestedInput
@@ -5021,6 +5069,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     changeType?: StringFieldUpdateOperationsInput | string
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5038,6 +5087,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     changeType: string
     changedAt?: Date | string
   }
@@ -5054,6 +5104,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     changeType?: StringFieldUpdateOperationsInput | string
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5071,6 +5122,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     changeType?: StringFieldUpdateOperationsInput | string
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5193,6 +5245,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5209,6 +5262,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5225,6 +5279,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5279,6 +5334,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     changeType?: SortOrder
     changedAt?: SortOrder
   }
@@ -5296,6 +5352,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     changeType?: SortOrder
     changedAt?: SortOrder
   }
@@ -5313,6 +5370,7 @@ export namespace Prisma {
     qtdeEntregas?: SortOrder
     vrFrete?: SortOrder
     termino?: SortOrder
+    status?: SortOrder
     changeType?: SortOrder
     changedAt?: SortOrder
   }
@@ -5574,6 +5632,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     changeType: string
     changedAt?: Date | string
   }
@@ -5590,6 +5649,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     changeType: string
     changedAt?: Date | string
   }
@@ -5636,6 +5696,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFilter<"CargaHistorico"> | string
     vrFrete?: StringFilter<"CargaHistorico"> | string
     termino?: StringFilter<"CargaHistorico"> | string
+    status?: StringFilter<"CargaHistorico"> | string
     changeType?: StringFilter<"CargaHistorico"> | string
     changedAt?: DateTimeFilter<"CargaHistorico"> | Date | string
   }
@@ -5652,6 +5713,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5668,6 +5730,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5700,6 +5763,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5716,6 +5780,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5732,6 +5797,7 @@ export namespace Prisma {
     qtdeEntregas: string
     vrFrete: string
     termino: string
+    status?: string
     changeType: string
     changedAt?: Date | string
   }
@@ -5748,6 +5814,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     changeType?: StringFieldUpdateOperationsInput | string
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5764,6 +5831,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     changeType?: StringFieldUpdateOperationsInput | string
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5780,6 +5848,7 @@ export namespace Prisma {
     qtdeEntregas?: StringFieldUpdateOperationsInput | string
     vrFrete?: StringFieldUpdateOperationsInput | string
     termino?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     changeType?: StringFieldUpdateOperationsInput | string
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

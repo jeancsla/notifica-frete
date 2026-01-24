@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { DashboardLayout } from "./components/DashboardLayout";
 import { Overview } from "./components/Overview";
+import { PastCargas } from "./components/PastCargas";
 import { LoginPage } from "./components/LoginPage";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -39,6 +40,8 @@ function App() {
     switch (activeTab) {
       case "overview":
         return <Overview />;
+      case "history":
+        return <PastCargas />;
       case "freights":
         return (
           <div className="flex flex-col items-center justify-center min-h-[400px] text-muted-foreground bg-card/10 rounded-lg border border-white/5 border-dashed">

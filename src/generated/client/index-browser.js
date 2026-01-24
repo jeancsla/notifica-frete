@@ -132,6 +132,7 @@ exports.Prisma.CargaScalarFieldEnum = {
   qtdeEntregas: 'qtdeEntregas',
   vrFrete: 'vrFrete',
   termino: 'termino',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -149,6 +150,7 @@ exports.Prisma.CargaHistoricoScalarFieldEnum = {
   qtdeEntregas: 'qtdeEntregas',
   vrFrete: 'vrFrete',
   termino: 'termino',
+  status: 'status',
   changeType: 'changeType',
   changedAt: 'changedAt'
 };

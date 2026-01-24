@@ -19,6 +19,10 @@ export const cronRoute = (
       await logger.info("Starting scheduled cron execution");
       const cargas = await scraper.scrape();
 
+      // Sync status: mark all as ARCHIVED, then mark scraped as ACTIVE
+      const viagemIds = cargas.map((c) => c.viagem);
+      await db.syncCargasStatus(viagemIds);
+
       const summary: ScrapeSummary = {
         totalFound: cargas.length,
         created: 0,
