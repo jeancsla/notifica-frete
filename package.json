@@ -3,7 +3,7 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"bun dev:backend\" \"bun dev:frontend\"",
+    "dev": "bun install && concurrently \"bun dev:backend\" \"bun dev:frontend\"",
     "dev:backend": "bun --hot src/index.ts",
     "dev:frontend": "cd web && bun vite build --watch",
     "build": "cd web && bun build",
