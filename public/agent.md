@@ -1,8 +1,12 @@
-# AI Agent Guide - Public (Frontend)
+# AI Agent Guide - Public (Legacy/Static Assets)
+
+> [!IMPORTANT]
+> This directory is now for **static assets only** (favicon, public images).
+> The main frontend has been moved to the `/web` directory.
 
 ## Context & Purpose
 
-Contains the static assets for the scraper dashboard. This is a Vanilla JS/HTML/CSS implementation served by Elysia.
+Contains legacy static assets. The original Vanilla JS/HTML dashboard is deprecated.
 
 ## Architecture & Patterns
 

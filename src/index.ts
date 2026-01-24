@@ -23,13 +23,12 @@ const app = new Elysia()
   .use(cors())
   .use(
     staticPlugin({
-      assets: "public",
+      assets: "web/dist",
       prefix: "",
     }),
   )
   .use(authRoute(logger))
-  .get("/login", () => Bun.file("public/login.html"))
-  .get("/", () => Bun.file("public/index.html"))
+  .get("/", () => Bun.file("web/dist/index.html"))
   .use(healthRoute(dbService))
   .use(authMiddleware)
   .use(dataRoute)

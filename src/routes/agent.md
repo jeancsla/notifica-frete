@@ -8,7 +8,7 @@ Handles HTTP request routing using ElysiaJS. This layer is responsible for defin
 
 - **Modular Routes**: Each route file exports a function that takes required services as arguments.
 - **RESTful Design**: Use proper HTTP methods (GET for data, POST for actions like scrape).
-- **Consistent Responses**: All routes should return a standard response structure (defined in `src/types`).
+- **Consistent Responses**: All routes must return a standard response structure and maintain strict types to support **Eden** (End-to-End Type Safety) for the React frontend.
 
 ## Key Files
 
