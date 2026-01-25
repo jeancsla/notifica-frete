@@ -1,36 +1,24 @@
 {
   "name": "notifica-frete",
-  "module": "src/index.ts",
-  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "bun install && concurrently \"bun dev:backend\" \"bun dev:frontend\"",
-    "dev:backend": "bun --hot src/index.ts",
-    "dev:frontend": "cd web && bun vite build --watch",
-    "build": "cd web && bun build",
-    "test": "bun test",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev"
-  },
-  "dependencies": {
-    "@elysiajs/bearer": "latest",
-    "@elysiajs/cors": "latest",
-    "@prisma/adapter-pg": "latest",
-    "@prisma/client": "latest",
-    "@prisma/config": "latest",
-    "cheerio": "latest",
-    "dotenv": "latest",
-    "elysia": "latest",
-    "@elysiajs/static": "latest",
-    "pg": "latest",
-    "zod": "latest"
+    "dev": "concurrently \"bun dev:api\" \"bun dev:web\"",
+    "dev:api": "cd apps/api && bun --hot src/index.ts",
+    "dev:web": "cd apps/web && bun run dev",
+    "build": "bun build:api && bun build:web",
+    "build:api": "cd apps/api && bun run build",
+    "build:web": "cd apps/web && bun run build",
+    "test": "bun test:api && bun test:web",
+    "test:api": "cd apps/api && bun test",
+    "test:web": "cd apps/web && bun test"
   },
   "devDependencies": {
-    "@types/cheerio": "latest",
-    "@types/node": "latest",
-    "@types/pg": "latest",
-    "bun-types": "latest",
     "concurrently": "^9.2.1",
-    "prisma": "latest",
     "typescript": "latest"
   }
 }

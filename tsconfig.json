@@ -4,17 +4,14 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "strict": true,
-    "skipLibCheck": true,
-    "allowJs": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "types": ["node", "bun-types"],
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true
+    "composite": true
   },
-  "include": ["src/**/*", "tests/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "references": [
+    { "path": "./apps/api" },
+    { "path": "./apps/web" }
+  ],
+  "files": []
 }

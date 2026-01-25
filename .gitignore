@@ -1,14 +1,18 @@
 # Dependencies
 node_modules/
+apps/*/node_modules/
+packages/*/node_modules/
 .bun/
 
 # Environment variables
 .env
 .env.*
 !.env.example
+apps/*/.env
 
 # Build outputs
 dist/
+apps/*/dist/
 build/
 .next/
 out/
@@ -27,5 +31,6 @@ Thumbs.db
 .vscode/
 
 # Prisma
+apps/api/src/generated/
 /prisma/dev.db
 /prisma/dev.db-journal

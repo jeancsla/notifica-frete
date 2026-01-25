@@ -1,0 +1,38 @@
+{
+  "name": "@notifica-frete/api",
+  "version": "1.0.0",
+  "type": "module",
+  "module": "src/index.ts",
+  "scripts": {
+    "dev": "bun --hot src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "start": "bun src/index.ts",
+    "test": "bun test",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "prisma:push": "prisma db push",
+    "clean:test-data": "bun run scripts/clean-test-data.ts"
+  },
+  "dependencies": {
+    "@elysiajs/bearer": "latest",
+    "@elysiajs/cors": "latest",
+    "@elysiajs/static": "latest",
+    "@prisma/adapter-pg": "latest",
+    "@prisma/client": "latest",
+    "@prisma/config": "latest",
+    "cheerio": "latest",
+    "dotenv": "latest",
+    "elysia": "latest",
+    "pg": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/cheerio": "latest",
+    "@types/node": "latest",
+    "@types/pg": "latest",
+    "bun-types": "latest",
+    "prisma": "latest",
+    "typescript": "latest"
+  }
+}
