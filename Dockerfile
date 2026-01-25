@@ -32,8 +32,7 @@ FROM oven/bun:1-slim AS production
 WORKDIR /app
 
 # Copy necessary files from builder
-COPY --from=builder /app/apps/api/dist ./apps/api/dist
-COPY --from=builder /app/apps/api/src/generated ./apps/api/src/generated
+COPY --from=builder /app/apps/api/src ./apps/api/src
 COPY --from=builder /app/apps/api/package.json ./apps/api/
 COPY --from=builder /app/apps/api/prisma ./apps/api/prisma
 COPY --from=builder /app/apps/api/prisma.config.ts ./apps/api/
