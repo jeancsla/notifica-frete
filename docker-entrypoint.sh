@@ -8,4 +8,4 @@ cd /app/apps/api
 bun prisma migrate deploy
 
 echo "Starting application..."
-exec bun src/index.ts
+exec bun dist/index.js
