@@ -37,6 +37,72 @@ This project uses **Prisma 7**, which introduces a new configuration system.
    bun run dev
    ```
 
+## Docker Deployment
+
+The project includes Docker configuration for easy deployment.
+
+### Quick Start with Docker Compose
+
+1. **Copy environment file**:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Edit `.env` file** with your configuration:
+   ```bash
+   # Required variables
+   ADMIN_PASSWORD=your-secure-password
+   CRON_SECRET=your-cron-secret
+   SCRAPER_USERNAME=your-username
+   SCRAPER_PASSWORD=your-password
+   ```
+
+3. **Start services** (app + PostgreSQL):
+   ```bash
+   docker compose up -d
+   ```
+
+4. **View logs**:
+   ```bash
+   docker compose logs -f app
+   ```
+
+5. **Access the application**:
+   - Open http://localhost:3000
+   - Login with the `ADMIN_PASSWORD` you set
+
+6. **Stop services**:
+   ```bash
+   docker compose down
+   ```
+
+### Manual Docker Build
+
+If you want to use an external PostgreSQL database:
+
+```bash
+# Build the image
+docker build -t notifica-frete .
+
+# Run the container
+docker run -d \
+  -p 3000:3000 \
+  -e DATABASE_URL="postgresql://user:pass@host:5432/db" \
+  -e ADMIN_PASSWORD="your-password" \
+  -e CRON_SECRET="your-secret" \
+  -e SCRAPER_USERNAME="username" \
+  -e SCRAPER_PASSWORD="password" \
+  notifica-frete
+```
+
+### Docker Features
+
+- Multi-stage build for optimal image size
+- Automatic database migrations on container start
+- Health checks for both app and database
+- PostgreSQL data persists in Docker volume
+- Ready for production deployment
+
 ## API Endpoints
 
 ### `GET /health`

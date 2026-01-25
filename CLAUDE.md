@@ -172,6 +172,62 @@ The project is configured for Vercel deployment with Bun runtime.
 - `ENABLE_AUTH` - Optional, set to "false" to disable auth (not recommended for production)
 - `NODE_ENV` - Set to "production"
 
+### Docker Deployment
+
+The project includes Docker configuration for containerized deployment.
+
+**Quick Start with Docker Compose**:
+```bash
+# Copy and configure environment variables
+cp .env.example .env
+# Edit .env with your configuration
+
+# Start all services (app + PostgreSQL)
+docker compose up -d
+
+# View logs
+docker compose logs -f app
+
+# Stop services
+docker compose down
+
+# Stop and remove volumes (deletes database data)
+docker compose down -v
+```
+
+**Docker Compose Services**:
+- `postgres` - PostgreSQL 16 database with persistent volume
+- `app` - Notifica Frete application (API + Web)
+
+**Building Docker Image Manually**:
+```bash
+# Build the image
+docker build -t notifica-frete .
+
+# Run with external PostgreSQL
+docker run -d \
+  -p 3000:3000 \
+  -e DATABASE_URL="postgresql://user:pass@host:5432/db" \
+  -e ADMIN_PASSWORD="your-password" \
+  -e CRON_SECRET="your-secret" \
+  -e SCRAPER_USERNAME="username" \
+  -e SCRAPER_PASSWORD="password" \
+  notifica-frete
+```
+
+**Docker Configuration Files**:
+- `Dockerfile` - Multi-stage build optimized for Bun runtime
+- `docker-compose.yml` - Orchestrates app and database services
+- `.dockerignore` - Optimizes build context by excluding unnecessary files
+- `.env.example` - Template for Docker Compose environment variables
+
+**Important Notes**:
+- The Docker image uses multi-stage build for optimal size
+- Prisma client is generated during the build process
+- Health checks are configured for both services
+- PostgreSQL data persists in a Docker volume (`postgres_data`)
+- The app waits for PostgreSQL to be healthy before starting
+
 ## Special Considerations
 
 ### Prisma 7 Migration
