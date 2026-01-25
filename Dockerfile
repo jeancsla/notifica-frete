@@ -28,18 +28,28 @@ RUN cd apps/api && bun run prisma:generate
 RUN bun run build
 
 # Production stage - Runtime
-FROM oven/bun:1-slim AS production
+FROM oven/bun:1 AS production
 WORKDIR /app
 
-# Copy necessary files from builder
-COPY --from=builder /app/apps/api/src ./apps/api/src
-COPY --from=builder /app/apps/api/package.json ./apps/api/
-COPY --from=builder /app/apps/api/prisma ./apps/api/prisma
-COPY --from=builder /app/apps/api/prisma.config.ts ./apps/api/
-COPY --from=builder /app/apps/web/dist ./apps/web/dist
+# Copy package files first
 COPY --from=builder /app/package.json ./
+COPY --from=builder /app/apps/api/package.json ./apps/api/
+COPY --from=builder /app/apps/web/package.json ./apps/web/
+
+# Copy node_modules
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/apps/api/node_modules ./apps/api/node_modules
+
+# Copy Prisma files
+COPY --from=builder /app/apps/api/prisma ./apps/api/prisma
+COPY --from=builder /app/apps/api/prisma.config.ts ./apps/api/
+
+# Copy source and built files
+COPY --from=builder /app/apps/api/src ./apps/api/src
+COPY --from=builder /app/apps/web/dist ./apps/web/dist
+
+# Regenerate Prisma client in production environment
+RUN cd apps/api && bun prisma generate
 
 # Copy entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/
