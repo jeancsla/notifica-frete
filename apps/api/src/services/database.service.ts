@@ -1,5 +1,5 @@
 import { prisma } from "../infra/prisma";
-import { Prisma } from "../generated/client";
+import { Prisma } from "@prisma/client";
 import { CargaData } from "../schemas/carga.schema";
 import { ProcessResult } from "../types";
 import { LoggerService } from "./logger.service";
