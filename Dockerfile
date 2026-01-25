@@ -5,14 +5,18 @@ FROM oven/bun:1 AS base
 WORKDIR /app
 
 # Copy package files
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 COPY apps/api/package.json ./apps/api/
 COPY apps/web/package.json ./apps/web/
+
+# Copy Prisma files (needed for postinstall hook)
+COPY apps/api/prisma ./apps/api/prisma
+COPY apps/api/prisma.config.ts ./apps/api/
 
 # Install dependencies (includes prisma postinstall hook)
 RUN bun install --frozen-lockfile
 
-# Copy source code
+# Copy rest of source code
 COPY . .
 
 # Build stage - Build applications

@@ -5,7 +5,7 @@
   "module": "src/index.ts",
   "scripts": {
     "dev": "bun --hot src/index.ts",
-    "build": "prisma generate && bun build src/index.ts --outdir dist --target bun",
+    "build": "prisma generate && bun build src/index.ts --outdir dist --target bun --external @prisma/* --external pg --external cheerio",
     "start": "bun src/index.ts",
     "test": "bun test",
     "postinstall": "prisma generate",
