@@ -38,7 +38,10 @@ const app = new Elysia()
   .use(dataRoute)
   .use(scrapeRoute(scraperService, dbService))
   .use(cronRoute(scraperService, dbService, notificationService))
-  .listen(process.env.PORT || 3000);
+  .listen({
+    hostname: "0.0.0.0",
+    port: process.env.PORT || 3000,
+  });
 
 console.log(
   `🦊 Scraper API is running at ${app.server?.hostname}:${app.server?.port}`,
