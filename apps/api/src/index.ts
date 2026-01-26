@@ -14,6 +14,7 @@ import { LoggerService } from "./services/logger.service";
 import { ScraperService } from "./services/scraper.service";
 import { NotificationService } from "./services/notification.service";
 import { AnalyticsService } from "./services/analytics.service";
+import { SchedulerService } from "./services/scheduler.service";
 
 const logger = new LoggerService();
 const dbService = new DatabaseService(logger);
@@ -21,6 +22,12 @@ const authService = new AuthService(logger);
 const scraperService = new ScraperService(authService, logger);
 const notificationService = new NotificationService(logger);
 const analyticsService = new AnalyticsService(logger);
+const schedulerService = new SchedulerService(
+  scraperService,
+  dbService,
+  notificationService,
+  logger,
+);
 
 const app = new Elysia()
   .use(cors())
@@ -46,5 +53,13 @@ const app = new Elysia()
 console.log(
   `🦊 Scraper API is running at ${app.server?.hostname}:${app.server?.port}`,
 );
+
+// Start the scheduler if enabled
+if (process.env.ENABLE_SCHEDULER !== "false") {
+  schedulerService.start();
+  console.log("⏰ Scheduler enabled - scraper will run every 15 minutes");
+} else {
+  console.log("⏰ Scheduler disabled");
+}
 
 export type App = typeof app;
