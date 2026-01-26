@@ -9,9 +9,17 @@ export class NotificationService {
 
   async sendCargaNotification(carga: any, status: "created" | "updated") {
     if (!this.webhookUrl) {
-      await this.logger.warn(
+      await this.logger.debug(
         "Notification skipped: NOTIFICATION_WEBHOOK_URL not set",
       );
+      return;
+    }
+
+    // Validate URL
+    try {
+      new URL(this.webhookUrl);
+    } catch {
+      await this.logger.warn("Notification skipped: NOTIFICATION_WEBHOOK_URL is invalid");
       return;
     }
 
@@ -47,7 +55,18 @@ export class NotificationService {
   }
 
   async sendSummaryNotification(summary: any) {
-    if (!this.webhookUrl) return;
+    if (!this.webhookUrl) {
+      await this.logger.debug("Notification skipped: NOTIFICATION_WEBHOOK_URL not set");
+      return;
+    }
+
+    // Validate URL
+    try {
+      new URL(this.webhookUrl);
+    } catch {
+      await this.logger.warn("Notification skipped: NOTIFICATION_WEBHOOK_URL is invalid");
+      return;
+    }
 
     const payload = {
       event: "scrape.complete",
