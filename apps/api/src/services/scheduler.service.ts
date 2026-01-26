@@ -1,4 +1,4 @@
-import cron from "node-cron";
+import * as cron from "node-cron";
 import { LoggerService } from "./logger.service";
 import { ScraperService } from "./scraper.service";
 import { DatabaseService } from "./database.service";
@@ -22,7 +22,7 @@ export class SchedulerService {
     this.task = cron.schedule(
       "*/15 * * * *",
       async () => {
-        const executionId = crypto.randomUUID();
+        const executionId = crypto.randomUUID() as string;
         this.logger.info("Scheduled scraping started", { executionId });
 
         try {
@@ -38,8 +38,12 @@ export class SchedulerService {
           const scrapedViagems = results.map((c) => c.viagem);
           await this.dbService.syncCargasStatus(scrapedViagems);
 
-          // Send notifications
-          await this.notificationService.notifyNewCargas(results);
+          // Send summary notification
+          await this.notificationService.sendSummaryNotification({
+            total: results.length,
+            executionId,
+            timestamp: new Date().toISOString(),
+          });
 
           this.logger.info("Scheduled scraping completed successfully", {
             executionId,
@@ -54,11 +58,11 @@ export class SchedulerService {
         }
       },
       {
-        scheduled: true,
         timezone: "America/Sao_Paulo", // Adjust to your timezone
       },
     );
 
+    this.task.start();
     this.logger.info("Scheduler started - will run every 15 minutes");
   }
 

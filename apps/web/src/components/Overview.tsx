@@ -77,8 +77,16 @@ export function Overview() {
 
   const trackPageView = async () => {
     try {
+      // Get or create session ID
+      let sessionId = localStorage.getItem("nf_session");
+      if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        localStorage.setItem("nf_session", sessionId);
+      }
+
       await api.api.analytics.track.post({
         page: "overview",
+        sessionId,
         userAgent: navigator.userAgent,
       });
     } catch (err) {
