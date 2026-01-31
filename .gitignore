@@ -3,6 +3,7 @@ node_modules/
 apps/*/node_modules/
 packages/*/node_modules/
 .bun/
+.agent/
 
 # Environment variables
 .env
@@ -34,3 +35,6 @@ Thumbs.db
 apps/api/src/generated/
 /prisma/dev.db
 /prisma/dev.db-journal
+
+# Agent
+.agent

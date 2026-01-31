@@ -7,4 +7,6 @@ const connectionString = process.env.DATABASE_URL;
 const pool = new pg.Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 
+console.log("🔌 Database connection initialized with pooling");
+
 export const prisma = new PrismaClient({ adapter });

@@ -58,9 +58,6 @@ describe("ScraperService", () => {
     // Mock JSON Response as provided by user
     const mockJson = JSON.stringify([
       {
-        headers: {},
-        statusCode: 200,
-        statusMessage: "OK",
         cargasExtraidas: [
           {
             viagem: "889900",

@@ -6,19 +6,9 @@ import { LoggerService } from "../../src/services/logger.service";
 // This test checks the integration between Scraper -> Parser -> Database
 // We mock only the external network (fetch)
 
-const mockPrisma = {
-  carga: {
-    findUnique: mock(() => null),
-    create: mock((data: any) => ({ id: "flow_id", ...data.data })),
-  },
-  cargaHistorico: {
-    create: mock(() => ({})),
-  },
-  scraperLog: {
-    create: mock(() => Promise.resolve({})),
-  },
-  $transaction: mock(async (cb: any) => await cb(mockPrisma)),
-};
+import { createMockPrisma } from "../test-utils";
+
+const mockPrisma = createMockPrisma();
 
 mock.module("../../src/infra/prisma", () => ({
   prisma: mockPrisma,

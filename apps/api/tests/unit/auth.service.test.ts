@@ -156,4 +156,60 @@ describe("AuthService", () => {
     );
     expect(cookie).toContain("NewSession=active");
   });
+
+  it("should handle multiple cookies in login response", async () => {
+    const mockFetch = mock((url, init) => {
+      if (
+        typeof url === "string" &&
+        url.endsWith("/Login") &&
+        init?.method === "POST"
+      ) {
+        return Promise.resolve(
+          new Response(null, {
+            headers: {
+              "set-cookie": "Cookie1=Val1; path=/, Cookie2=Val2; path=/",
+            },
+          }),
+        );
+      }
+      return Promise.resolve(
+        new Response(null, {
+          headers: { "set-cookie": "Initial=InitVal; path=/" },
+        }),
+      );
+    });
+
+    global.fetch = mockFetch as any;
+    const authService = new AuthService(logger);
+    const cookie = await authService.authenticate();
+
+    expect(cookie).toContain("Initial=InitVal");
+    expect(cookie).toContain("Cookie1=Val1");
+    expect(cookie).toContain("Cookie2=Val2");
+  });
+
+  it("should use custom headers and user-agent in HEAD validation", async () => {
+    let capturedHeaders: Headers | undefined;
+    const mockFetch = mock((url, init) => {
+      capturedHeaders = init?.headers as Headers;
+      return Promise.resolve(new Response(null, { status: 200 }));
+    });
+
+    global.fetch = mockFetch as any;
+    const authService = new AuthService(logger);
+    // @ts-ignore - access private for testing cache injection
+    authService.cachedCookie = "test-cookie";
+
+    await authService.authenticate();
+
+    const userAgent =
+      (capturedHeaders as any)?.["user-agent"] ||
+      (capturedHeaders as any)?.get?.("user-agent");
+    const cookie =
+      (capturedHeaders as any)?.["cookie"] ||
+      (capturedHeaders as any)?.get?.("cookie");
+
+    expect(userAgent).toMatch(/Mozilla\/5\.0/);
+    expect(cookie).toBe("test-cookie");
+  });
 });

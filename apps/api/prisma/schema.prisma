@@ -6,6 +6,8 @@ datasource db {
   provider = "postgresql"
 }
 
+
+
 model Carga {
   id             String           @id @default(cuid())
   viagem         String           @unique
