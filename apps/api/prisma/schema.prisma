@@ -3,72 +3,42 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
-
-
 
 model Carga {
-  id             String           @id @default(cuid())
-  viagem         String           @unique
-  tipoTransporte String
-  origem         String
-  destino        String
-  produto        String
-  equipamento    String
-  prevColeta     String
-  qtdeEntregas   String
-  vrFrete        String
-  termino        String
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-  status         String           @default("ACTIVE")
-  historico      CargaHistorico[]
+  id               String   @id @default(uuid())
+  viagem           String   @unique
+  origem           String
+  destino          String
+  data             String
+  tonelagem        String
+  tipo             String
+  empresa          String
+  status           String   @default("ACTIVE")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  lastScrapedAt    DateTime @default(now())
+  notificationSent Boolean  @default(false)
 
-  @@index([viagem])
-  @@index([createdAt])
   @@index([status])
-}
-
-model CargaHistorico {
-  id             String   @id @default(cuid())
-  cargaId        String
-  viagem         String
-  tipoTransporte String
-  origem         String
-  destino        String
-  produto        String
-  equipamento    String
-  prevColeta     String
-  qtdeEntregas   String
-  vrFrete        String
-  termino        String
-  changeType     String
-  changedAt      DateTime @default(now())
-  status         String   @default("ACTIVE")
-  carga          Carga    @relation(fields: [cargaId], references: [id], onDelete: Cascade)
-
-  @@index([cargaId])
   @@index([viagem])
-  @@index([changedAt])
 }
 
 model ScraperLog {
-  id          String   @id @default(cuid())
+  id          String   @id @default(uuid())
   level       String
   message     String
   context     String?
   error       String?
   executionId String?
   timestamp   DateTime @default(now())
-
-  @@index([level])
-  @@index([executionId])
-  @@index([timestamp])
 }
 
 model PageView {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   page      String
   sessionId String?
   userAgent String?

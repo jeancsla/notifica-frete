@@ -1,5 +1,6 @@
 import { bearer } from "@elysiajs/bearer";
 import { Elysia } from "elysia";
+import { Buffer } from "buffer";
 
 export const authMiddleware = new Elysia()
   .use(bearer())
