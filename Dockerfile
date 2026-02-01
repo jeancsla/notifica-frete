@@ -10,8 +10,8 @@ COPY apps/api/package.json ./apps/api/
 COPY apps/web/package.json ./apps/web/
 
 # Copy Prisma files (needed for postinstall hook)
+COPY prisma.config.ts ./
 COPY apps/api/prisma ./apps/api/prisma
-COPY apps/api/prisma.config.ts ./apps/api/
 
 # Install dependencies (includes prisma postinstall hook)
 RUN bun install --frozen-lockfile
@@ -41,8 +41,8 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/apps/api/node_modules ./apps/api/node_modules
 
 # Copy Prisma files
+COPY --from=builder /app/prisma.config.ts ./
 COPY --from=builder /app/apps/api/prisma ./apps/api/prisma
-COPY --from=builder /app/apps/api/prisma.config.ts ./apps/api/
 
 # Copy source and built files
 COPY --from=builder /app/apps/api/src ./apps/api/src
