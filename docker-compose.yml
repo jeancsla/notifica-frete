@@ -35,7 +35,7 @@ services:
     ports:
       - "${PORT:-3000}:3000"
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-scraper_db}?sslmode=disable
+      DATABASE_URL: ${DATABASE_URL}
       SCRAPER_USERNAME: ${SCRAPER_USERNAME}
       SCRAPER_PASSWORD: ${SCRAPER_PASSWORD}
       PORT: ${PORT:-3000}

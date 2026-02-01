@@ -19,14 +19,12 @@
     "@elysiajs/bearer": "latest",
     "@elysiajs/cors": "latest",
     "@elysiajs/static": "latest",
-    "@prisma/adapter-pg": "latest",
-    "@prisma/client": "latest",
-    "@prisma/config": "latest",
+    "@prisma/client": "^6.2.0",
     "cheerio": "latest",
     "dotenv": "latest",
     "elysia": "latest",
-    "pg": "latest",
-    "prisma": "latest",
+    "pg": "8.11.0",
+    "prisma": "^6.2.0",
     "zod": "latest"
   },
   "devDependencies": {

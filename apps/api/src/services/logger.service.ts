@@ -19,7 +19,14 @@ export class LoggerService {
     error?: Error | string,
   ) {
     const timestamp = new Date().toISOString();
-    const errorStr = error instanceof Error ? error.stack : error;
+    const errorStr =
+      error instanceof Error
+        ? error.stack
+        : typeof error === "string"
+          ? error
+          : error
+            ? JSON.stringify(error)
+            : null;
     const contextStr = context ? JSON.stringify(context) : null;
     const execIdLabel = this.executionId ? `[${this.executionId}] ` : "";
 
@@ -40,6 +47,7 @@ export class LoggerService {
       console.log(consoleMsg, context ? { context } : "");
     }
 
+    /*
     try {
       await prisma.scraperLog.create({
         data: {
@@ -47,16 +55,17 @@ export class LoggerService {
           message,
           context: contextStr,
           error: errorStr,
-          executionId: this.executionId,
+          executionId: this.executionId ?? null,
         },
       });
-    } catch (dbError) {
+    } catch (dbError: any) {
       const dbTimestamp = new Date().toISOString();
       console.error(
         `${dbTimestamp} [ERROR] Failed to write log to database:`,
-        dbError,
+        dbError.message || dbError,
       );
     }
+    */
   }
 
   async info(message: string, context?: any) {

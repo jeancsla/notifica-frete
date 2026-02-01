@@ -1,12 +1,18 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-import pg from "pg";
+import * as dotenv from "dotenv";
+import path from "path";
 
-const connectionString = process.env.DATABASE_URL;
+// Ensure environment variables are loaded
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
+if (!process.env.DATABASE_URL) {
+  dotenv.config({ path: path.resolve(process.cwd(), "../../.env") });
+}
 
-const pool = new pg.Pool({ connectionString });
-const adapter = new PrismaPg(pool);
+if (!process.env.DATABASE_URL) {
+  console.error("❌ DATABASE_URL is not defined in environment variables");
+  throw new Error("Missing DATABASE_URL");
+}
 
-console.log("🔌 Database connection initialized with pooling");
+console.log("🔌 Database connection initializing native client (v6.x)...");
 
-export const prisma = new PrismaClient({ adapter });
+export const prisma = new PrismaClient();
